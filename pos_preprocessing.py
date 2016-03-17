@@ -1,17 +1,9 @@
 import os
 import sys
 import re
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import treetaggerwrapper
 import time
-from sklearn.neighbors import DistanceMetric
-from sklearn.metrics.pairwise import cosine_similarity
-from lexical_features import punctuation
-from lexical_features import vocabulary
-from lexical_features import phrases
 
 #convert text to tags using TreeTagger wrapper for Python
 def text_to_tags(text):

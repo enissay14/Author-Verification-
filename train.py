@@ -5,29 +5,32 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-import treetaggerwrapper
-import time
 from sklearn.neighbors import DistanceMetric
 from sklearn.metrics.pairwise import cosine_similarity
 from lexical_features import punctuation
 from lexical_features import vocabulary
 from lexical_features import phrases
 
-#convert text to tags using TreeTagger wrapper for Python
-def text_to_tags(text):
-    tagger = treetaggerwrapper.TreeTagger(TAGLANG='en',TAGDIR='/home/yassine/EMSE 2015-2016/Projet Recherche/tree-tagger-linux-3.2')
-    tags = treetaggerwrapper.make_tags(tagger.tag_text(unicode(text,encoding='utf-8')))
-    pos_tags = []
-    for pos in tags:
-        pos_tags.append(pos[1])
-    return " ".join(pos_tags)
-
-
 path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
 filenames = []
 filenames_tags = []
 filenames_first = []
 filenames_last = []
+pb_counter = 0
+
+#Preparing the target function
+target_dict = {}
+truthfile = open(path+'/'+'truth.txt',"r")
+truth = truthfile.readlines()
+target = []
+
+for line in truth:
+    b = line.split()
+
+    if b[1] == 'Y':
+        target_dict[b[0].decode('utf-8-sig')] = 1
+    else: target_dict[b[0].decode('utf-8-sig')] = 0
+    
 
 start_time = time.time()
 for root, dirs, files in os.walk(path):
@@ -37,7 +40,9 @@ for root, dirs, files in os.walk(path):
             
             print '~~~~~~//// Processing Problem: '+directory+' \\\\\\~~~~~~'
             
-            #get documents paths for the problem: e.g known01.txt , known02.txt ... and unknown.txt
+        ### TASK 1 ###
+        #get documents paths for the problem: e.g known01.txt , known02.txt ... and unknown.txt
+        
             print 'Getting documents paths...'
             for name in sorted(f):
                 if  not "tags" in name and not "first" in name and not "last" in name:
@@ -50,7 +55,7 @@ for root, dirs, files in os.walk(path):
                     filenames_last.append(path+'/'+directory+'/'+name)   #populating last tags filenames array
                     
               
-        ### TASK 1 ###
+        ### TASK 2 ###
         #Compute the documents representations using the paths stored in the 'filenames' array
         
             #char 8-gram tfidf feature
@@ -88,7 +93,7 @@ for root, dirs, files in os.walk(path):
             first_pos = freq_pos.fit_transform(filenames_first).toarray()
             last_pos = freq_pos.fit_transform(filenames_last).toarray()
 
-        ### TASK 2 ###
+        ### TASK 3 ###
         #compute the distance between known and unknown documents for each feature
             
             #distance between known and unknown doc on 8-char feature
@@ -106,21 +111,33 @@ for root, dirs, files in os.walk(path):
             first_posM = cosine_similarity(first_pos)
             last_posM = cosine_similarity(last_pos)
             
-        ### TASK 3 ###
+        ### TASK 4 ###
         #strore the new vector of distance as a new observation for the specific problem (in 'directory')
             
             #take the mean of the all the distances between known documents and the unknown doc
-            print eight_charM[(len(eight_charM)-1),:(len(eight_charM)-1)].mean()
-            print punctM[(len(punctM)-1),:(len(punctM)-1)].mean()
-            print vocabM[(len(vocabM)-1),:(len(vocabM)-1)].mean()
-            print phraseM[(len(phraseM)-1),:(len(phraseM)-1)].mean()
-            print four_posM[(len(four_posM)-1),:(len(four_posM)-1)].mean()
-            print first_posM[(len(first_posM)-1),:(len(first_posM)-1)].mean()
-            print last_posM[(len(last_posM)-1),:(len(last_posM)-1)].mean()
+            pb = np.zeros((1, 7))
+            pb[0,0] = eight_charM[(len(eight_charM)-1),:(len(eight_charM)-1)].mean()
+            pb[0,1] = punctM[(len(punctM)-1),:(len(punctM)-1)].mean()
+            pb[0,2] = vocabM[(len(vocabM)-1),:(len(vocabM)-1)].mean()
+            pb[0,3] = phraseM[(len(phraseM)-1),:(len(phraseM)-1)].mean()
+            pb[0,4] =four_posM[(len(four_posM)-1),:(len(four_posM)-1)].mean()
+            pb[0,5] = first_posM[(len(first_posM)-1),:(len(first_posM)-1)].mean()
+            pb[0,6] = last_posM[(len(last_posM)-1),:(len(last_posM)-1)].mean()
+
+            print 'Adding Problem row to the training matrice..'
+            target.append(target_dict[directory])
+
+            #populating the training Matrice
+            if pb_counter == 0:
+                    Mtrain = pb
+                    pb_counter += 1
+            else:
+                    Mtrain = np.concatenate((Mtrain,pb))
 
             #empty 'filenames' arrays
             filenames = []
             filenames_tags = []
             filenames_first = []
             filenames_last = []
-    
+print 'Done'
+print np.column_stack((Mtrain,target))
