@@ -36,7 +36,9 @@ for root, dirs, files in os.walk(path):
             #distance between known and unknown doc on 8-char feature
             print 'calculating distances for 8-gram feature...'
             eight_charM = cosine_similarity(eight_char)
-            print eight_charM
+            
+            #take the mean of the all the distances between known documents and the unknown doc
+            print eight_charM[(len(eight_charM)-1),:(len(eight_charM)-1)].mean()
             
             
             
@@ -46,3 +48,4 @@ for root, dirs, files in os.walk(path):
 
             #empty 'filenames' array
             filenames = []
+            
