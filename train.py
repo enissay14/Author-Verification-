@@ -35,54 +35,26 @@ for root, dirs, files in os.walk(path):
         #print directory[-2:]  #corpus
         for r, d, f in os.walk(path+'/'+directory):
             
-            print 'Processing problem: '+directory
+            print '~~~~~~//// Processing Problem: '+directory+' \\\\\\~~~~~~'
             
-            #get documents for the problem: e.g known01.txt , known02.txt ... and unknown.txt
+            #get documents paths for the problem: e.g known01.txt , known02.txt ... and unknown.txt
+            print 'Getting documents paths...'
             for name in sorted(f):
                 if  not "tags" in name and not "first" in name and not "last" in name:
-                    filenames.append(path+'/'+directory+'/'+name) #populating filenames array
-                
-                #POS Processing
-                #first_tags = []
-                #last_tags = []
-                #text_tags = []
-                
-                #if not "tags" in name and not "first" in name and not "last" in name:
-                    
-                    #print "[Part-Of-Speech] Processing file: "+ directory +"/"+ name + "... %f seconds elapsed" % (time.time() - start_time) 
-                   
-                   ##converting text to pos tags sentence by sentence to keep first and last tags seperately
-                    #f = open(path+'/'+directory+'/'+name,"r")
-                    #train = f.read()
-                    #sentences = train.replace('\n','')
-                    #sentences = train.replace('.','\n').splitlines()
-                    #for s in sentences:
-                        #s = text_to_tags(s)
-                        #first_tags.append(" ".join(s.split()[0:1])) #add first pos tags of each sentence to 'first_tags'
-                        #last_tags.append(" ".join(s.split()[-1:]))  #add last pos tags of each sentence to 'last_tags'
-                        #text_tags.append(s)       #add all pos tags of each sentence to 'lext_tags'
-                    
-                    #f_tags = open(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_tags.txt',"w") #write entire text in tags to file
-                    #f_tags.write(" ".join(text_tags))
-                    #f_tags.close()   
-                    #filenames_tags.append(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_tags.txt') 
-                    
-                    #f_first = open(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_first.txt',"w") #write first tags to file
-                    #f_first.write(" ".join(first_tags))
-                    #f_first.close() 
-                    #filenames_first.append(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_first.txt') 
-                    
-                    #f_last = open(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_last.txt',"w") #write last tags to file
-                    #f_last.write(" ".join(last_tags))
-                    #f_last.close() 
-                    #filenames_last.append(path+'/'+directory+'/'+ re.sub('\.txt$', '', name)+'_last.txt') 
+                    filenames.append(path+'/'+directory+'/'+name)                                           #populating filenames array
+                if "tags" in name:
+                    filenames_tags.append(path+'/'+directory+'/'+name)   #populating entire text in tags filenames array
+                if "first" in name:
+                    filenames_first.append(path+'/'+directory+'/'+name) #populating first tags filenames array
+                if "last" in name:
+                    filenames_last.append(path+'/'+directory+'/'+name)   #populating last tags filenames array
                     
               
         ### TASK 1 ###
         #Compute the documents representations using the paths stored in the 'filenames' array
         
             #char 8-gram tfidf feature
-            print '[8-gram] calculting tfidf for all documents...'
+            print '[8-gram] Calculting tfidf for all documents...'
             tfidf = TfidfVectorizer(input='filename',use_idf=True,analyzer='char',ngram_range=(8,8))
             eight_char = tfidf.fit_transform(filenames).toarray() 
             
@@ -105,6 +77,17 @@ for root, dirs, files in os.walk(path):
                             vocab = np.concatenate((vocab,tmp2))
                             phrase = np.concatenate((phrase,tmp3))
 
+            #contructing pos frequency and 4-pos grams
+            print "[Part-Of-Speech]  Calculting n-POS tfidf for all documents... "
+            freq_four_pos = TfidfVectorizer(input='filename',use_idf=False,analyzer='word',ngram_range=(4,4))
+            four_pos = freq_four_pos.fit_transform(filenames_tags).toarray()
+
+            #first and last pos tag freqency in each sentence
+            print "[Part-Of-Speech]  Calculting first & last POS tag frequencies for all documents... "
+            freq_pos = TfidfVectorizer(input='filename',use_idf=False,analyzer='word',ngram_range=(1,1))
+            first_pos = freq_pos.fit_transform(filenames_first).toarray()
+            last_pos = freq_pos.fit_transform(filenames_last).toarray()
+
         ### TASK 2 ###
         #compute the distance between known and unknown documents for each feature
             
@@ -117,7 +100,12 @@ for root, dirs, files in os.walk(path):
             dist = DistanceMetric.get_metric('euclidean')
             vocabM = dist.pairwise(vocab)
             phraseM = np.corrcoef(phrase)
-        
+            
+            print 'calculating distances for Part-Of-Speach features...'
+            four_posM = cosine_similarity(first_pos)
+            first_posM = cosine_similarity(first_pos)
+            last_posM = cosine_similarity(last_pos)
+            
         ### TASK 3 ###
         #strore the new vector of distance as a new observation for the specific problem (in 'directory')
             
@@ -126,6 +114,9 @@ for root, dirs, files in os.walk(path):
             print punctM[(len(punctM)-1),:(len(punctM)-1)].mean()
             print vocabM[(len(vocabM)-1),:(len(vocabM)-1)].mean()
             print phraseM[(len(phraseM)-1),:(len(phraseM)-1)].mean()
+            print four_posM[(len(four_posM)-1),:(len(four_posM)-1)].mean()
+            print first_posM[(len(first_posM)-1),:(len(first_posM)-1)].mean()
+            print last_posM[(len(last_posM)-1),:(len(last_posM)-1)].mean()
 
             #empty 'filenames' arrays
             filenames = []
