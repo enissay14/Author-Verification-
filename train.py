@@ -43,3 +43,6 @@ for root, dirs, files in os.walk(path):
             #compute the distance between known and unknown documents for each feature
             
             #strore the new vector of distance as a new observation for the specific problem (in 'directory')
+
+            #empty 'filenames' array
+            filenames = []
