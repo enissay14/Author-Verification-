@@ -8,6 +8,7 @@ import numpy as np
 import treetaggerwrapper
 import time
 from sklearn.neighbors import DistanceMetric
+from sklearn.metrics.pairwise import cosine_similarity
 
 #Script Structure
 path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
