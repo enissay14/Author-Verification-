@@ -11,6 +11,8 @@ from lexical_features import punctuation
 from lexical_features import vocabulary
 from lexical_features import phrases
 from sklearn import tree
+from sklearn.externals import joblib
+from sklearn import cross_validation
 
 path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
 filenames = []
@@ -36,6 +38,7 @@ for line in truth:
 for root, dirs, files in os.walk(path):
     
     for directory in sorted(dirs):
+        
         for r, d, f in os.walk(path+'/'+directory):
             
             print '~~~~~~//// Processing Problem: '+directory+' \\\\\\~~~~~~'
@@ -141,13 +144,9 @@ for root, dirs, files in os.walk(path):
             filenames_last = []
 
 print '~~~~~~//// Done \\\\\\~~~~~~'
-print 'Data saved to file Mtrain and Target'
+print 'Saving Mtrain and Target data to file...'
 #print np.column_stack((Mtrain,target))
 
-f_Mtrain = open('Mtrain',"w") 
-np.save(f_Mtrain, Mtrain)
-f_Mtrain.close() 
+np.save('Mtrain', Mtrain)
 
-f_target = open('Target',"w") 
-np.save(f_target, target)
-f_target.close() 
+np.save('Target', target)
