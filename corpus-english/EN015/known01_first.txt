@@ -1,0 +1,1 @@
+CC  IN  PP   DT  CC  NP  DT  CC  DT  CC  RB VV  NP  VBP  JJ   IN  DT   VV  DT  PP PP DT  PP$ NP NN VV  PP$   PP  NN  TO  RB  IN  PP$   PP  VV  VV IN PP TO  DT JJ RB JJ  RB  

@@ -15,7 +15,7 @@ def text_to_tags(text):
     return " ".join(pos_tags)
 
 
-path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
+path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english'
 
 start_time = time.time()
 for root, dirs, files in os.walk(path):

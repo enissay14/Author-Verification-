@@ -1,0 +1,1 @@
+NN : NN , , SENT   NN NN  , VVN  , SENT   VVN NP  , DT  PP SENT    , , , NN , SENT   NP   NP   NP   NP   NP   NP   NP   NP   SENT  NP   SENT  NP PP$ PP   PP   NP   NN PP DT PP   
