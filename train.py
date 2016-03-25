@@ -10,6 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from lexical_features import punctuation
 from lexical_features import vocabulary
 from lexical_features import phrases
+from sklearn import tree
 
 path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
 filenames = []
@@ -32,10 +33,9 @@ for line in truth:
     else: target_dict[b[0].decode('utf-8-sig')] = 0
     
 
-start_time = time.time()
 for root, dirs, files in os.walk(path):
+    
     for directory in sorted(dirs):
-        #print directory[-2:]  #corpus
         for r, d, f in os.walk(path+'/'+directory):
             
             print '~~~~~~//// Processing Problem: '+directory+' \\\\\\~~~~~~'
@@ -139,5 +139,15 @@ for root, dirs, files in os.walk(path):
             filenames_tags = []
             filenames_first = []
             filenames_last = []
-print 'Done'
-print np.column_stack((Mtrain,target))
+
+print '~~~~~~//// Done \\\\\\~~~~~~'
+print 'Data saved to file Mtrain and Target'
+#print np.column_stack((Mtrain,target))
+
+f_Mtrain = open('Mtrain',"w") 
+np.save(f_Mtrain, Mtrain)
+f_Mtrain.close() 
+
+f_target = open('Target',"w") 
+np.save(f_target, target)
+f_target.close() 
