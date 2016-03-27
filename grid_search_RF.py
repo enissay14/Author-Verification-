@@ -13,14 +13,9 @@ from scipy.stats import randint as sp_randint
 from sklearn.grid_search import GridSearchCV
 from sklearn.datasets import load_digits
 
-if sys.argv[1] == '-cv':
-    crossval = sys.argv[2]
-else: 
-    print "Missing parameter -cv numberOfCV"
-    sys.exit()
     
-if sys.argv[3] == '-nt':
-    trees = sys.argv[4]
+if sys.argv[1] == '-nt':
+    trees = sys.argv[2]
 else: 
     print "Missing parameter -nt numberOfTrees"
     sys.exit()
@@ -51,7 +46,7 @@ param_grid = {"max_depth": [3, None],
               "bootstrap": [True, False],
               "criterion": ["gini", "entropy"]}
 
-print 'Fitting a Random Forest Classifier with '+trees+' trees'
+print 'run grid search with a Random Forest Classifier with '+trees+' trees'
 forest = RandomForestClassifier(n_estimators = int(trees))
 
 # run grid search
