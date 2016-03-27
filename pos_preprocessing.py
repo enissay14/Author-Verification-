@@ -9,7 +9,7 @@ import sys
 if sys.argv[1] == '-p':
     n_problem = int(sys.argv[2])
 else: 
-    print "Missing parameter -p starting problem"
+    print "Missing parameter -p startingProblem"
     sys.exit()
     
 #convert text to tags using TreeTagger wrapper for Python
@@ -32,7 +32,7 @@ for root, dirs, files in os.walk(path):
             
             print 'Processing problem: '+directory
             
-            if(int(directory[-2:]) > n_problem ):
+            if(int(directory[-3:]) >= n_problem ):
                 
                 #get documents for the problem: e.g known01.txt , known02.txt ... and unknown.txt
                 for name in sorted(f):
