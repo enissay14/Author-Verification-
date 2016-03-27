@@ -46,7 +46,7 @@ param_grid = {"max_depth": [3, None],
               "bootstrap": [True, False],
               "criterion": ["gini", "entropy"]}
 
-print 'run grid search with a Random Forest Classifier with '+trees+' trees'
+print 'running grid search with a Random Forest Classifier with '+trees+' trees'
 forest = RandomForestClassifier(n_estimators = int(trees))
 
 # run grid search
