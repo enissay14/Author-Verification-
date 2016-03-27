@@ -1,0 +1,1 @@
+ FW   NN VBP JJ PP PP$ RB NP PP   JJ IN NN   NNS   JJ JJ   SENT  RB   NN VV DT   NN  NN     , , NN NN , : NN NN : , , : NN SENT  NN NN , NN JJ VV  NN , NN VV VVN  : SENT  , NN , SENT 

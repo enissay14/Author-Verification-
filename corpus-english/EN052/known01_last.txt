@@ -1,0 +1,1 @@
+ SENT  NP   RB   SENT  SENT  SENT  SENT  SENT  :  PP   NN JJ   NN   SENT  :  , , NN FW  , : , , NN FW   NN     SENT NN  SENT  , , JJ VVP  VVD , , :  , , VVG VVP  , , , VVP   , , NN , , , VVG VV   FW  

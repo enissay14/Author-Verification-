@@ -1,0 +1,1 @@
+, NP  , , , NNS  , , NN , , , NN NP   NN , , NN  , SENT , NN  NN '' , SENT , , NN NP   SENT  DT NN   SENT  NN SENT  PP NNS   NNS   IN VH VVP   RB PP   SENT  NN VB NP NNS NN JJS RB  

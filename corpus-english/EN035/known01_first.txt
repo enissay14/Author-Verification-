@@ -1,0 +1,1 @@
+RB DT PP DT  PP    VV  PP  DT  DT   TO  PP$   VBZ  CC  VV     DT TO WRB PP$ DT PP PP PP$  NP  NP  VV  DT  VV  PP  IN   WRB PDT WRB JJ  JJ  WP  WRB  JJ  PP  TO  TO  TO  PP  PP  PP  VV   WRB NN WP WP  JJ   PP  PP   WRB   

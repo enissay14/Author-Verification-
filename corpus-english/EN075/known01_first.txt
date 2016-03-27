@@ -1,0 +1,1 @@
+ NP VV  UH   NP  RB   UH DT  PP   VV  UH   PP   WRB   PP JJ   UH PP IN   IN  VV   CC  PP  NP  NN   IN   UH  EX PP   JJ    WRB  PP CC  RB   UH NP  VV  PP JJ PP   RB PP   VVP   RB   VBZ   UH   NP    PP DT VV CC   DT   PP  NN  NP  VVP  DT NP   PP NN   WP    PP   UH VV   UH

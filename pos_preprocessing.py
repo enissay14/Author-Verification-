@@ -7,7 +7,7 @@ import time
 import sys
 
 if sys.argv[1] == '-p':
-    n_problem = sys.argv[2]
+    n_problem = int(sys.argv[2])
 else: 
     print "Missing parameter -p starting problem"
     sys.exit()

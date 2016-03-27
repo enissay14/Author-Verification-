@@ -14,7 +14,14 @@ from sklearn import tree
 from sklearn.externals import joblib
 from sklearn import cross_validation
 
-path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/corpus-english-sample'
+if sys.argv[1] == '-path':
+    path = sys.argv[2]
+else: 
+    print "Missing parameter -path PathToCorpus"
+    sys.exit()
+
+
+path = '/home/yassine/EMSE 2015-2016/Projet Recherche/Author-Verification-/'+path
 filenames = []
 filenames_tags = []
 filenames_first = []

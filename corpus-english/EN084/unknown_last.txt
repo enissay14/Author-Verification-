@@ -1,0 +1,1 @@
+, , NN  NP   , , , NP   , , , NN  NP   SENT  RB NP RB JJ   DT   VVD VVD NNS   VBP   NN VH RB   NP   SENT  JJ   DT DT VBD   NN DT NN JJ NN   DT NN   RP  RB   RP NN   DT   

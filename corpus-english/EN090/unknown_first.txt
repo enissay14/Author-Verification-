@@ -1,0 +1,1 @@
+NP  NP  PP  NP  VV  WP  IN/that  UH PP PP   IN   PP$ VV DT JJ   WP  NP NN RB   VBZ  PP   NN  DT DT VVZ PP NN   PP   WRB NNS NP JJ NN ''  PP   RB PP DT IN PP   NP   NN SYM  PP   RB NP  NP  JJS PP$ VVG   PP   VV  DT   RB NNS `` NNS MD   PP NNS   WP  NP   NP

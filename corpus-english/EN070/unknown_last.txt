@@ -1,0 +1,1 @@
+ JJ    NN    , RB   NN SENT , SENT   JJ NN    , NN   JJ   VV   , RB  VVN NN    , NN   SENT SENT  RB JJ NN    , NN , RB NP NN  , PP    , NN    NN , , NN    SENT   SENT  NNS  , NN RB    ,    

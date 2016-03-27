@@ -1,0 +1,1 @@
+NNS   SENT  PP$ POS   VVZ DT NN DT NN   SENT  JJ NN NN   PP VVZ    NN  SENT  RB   SENT  JJR   SENT    : NN , , ,  , , NN   , , : VV , SENT  SENT  SENT  SENT  SENT  NN , SENT  JJ  JJ   , RB NN   , JJ NN   , , : MD , NP  SENT  SENT  SENT  SENT  NP , SENT
