@@ -6,5 +6,5 @@ Mtrain = np.load('Mtrain.npy')
 #f_target = open('Target',"r") 
 target = np.load('Target.npy')
 
-Mtrain.tofile('Mtrain.csv',sep=',')
-target.tofile('target.csv',sep=',')
+np.savetxt("Mtrain.csv", Mtrain, delimiter=",")
+np.savetxt("target.csv", target, delimiter=",")
